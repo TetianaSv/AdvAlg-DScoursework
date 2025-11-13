@@ -82,7 +82,7 @@ def main():
     
     #show results to user
     if route_stations:
-        print(f"Shortest route: {' → '.join(route_stations)}")
+        print(f"Shortest route: {' > '.join(route_stations)}")
         print(f"Number of stops: {distances[end_id]}")
         print(f"Stations visited: {len(route_stations)}")
         
@@ -123,7 +123,7 @@ def verification():
     
     if distances[destination_id] != float('inf'):
         route_stations = print_path(predecessors, start_id, destination_id, lambda i: stations[i])
-        print(f"Shortest route from {start} to {destination}: {' -> '.join(route_stations)}")
+        print(f"Shortest route from {start} to {destination}: {' > '.join(route_stations)}")
         print(f"Total number of stops: {distances[destination_id]}")
     else:
         print("No route found!")
@@ -134,4 +134,5 @@ if __name__ == "__main__":
     print("\n" + "="*50 + "\n")
     
     #run main program
+
     main()
