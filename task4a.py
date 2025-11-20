@@ -24,16 +24,15 @@ def original_graph():
 
 def main():
     g = original_graph()
-    mst = kruskal(g)
+    mst = kruskal(g) #compute MST using CLRS
 
     print("Edges in the MST")
-    total_weight = get_total_weight(mst)
-    for u in range(mst.get_card_V()):
-        for edge in mst.get_adj_list(u):
+    total_weight = get_total_weight(mst) #compute the total weight of the MST
+    for u in range(mst.get_card_V()): #iterate through all vertices of the MST
+        for edge in mst.get_adj_list(u): #for each vertex, iterate through its adjacency list
             v = edge.get_v()
-            if u < v:
-                print(f"{u+1} - {v+1} (weight{edge.get_weight()})")
-                total_weight +=edge.get_weight()
+            if u < v: #Since the graph is undirected, each edge appears twice
+                print(f"{u+1} - {v+1} (weight{edge.get_weight()})") #We print the edge only once, ensuring u < v.
     print(f"Total MST weight:{total_weight}")
 
 if __name__ == "__main__":
