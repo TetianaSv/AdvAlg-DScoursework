@@ -163,7 +163,6 @@ def print_undirected_edges(G, vertices):
 # Testing
 if __name__ == "__main__":
 
-    import numpy as np
     from generate_random_graph import generate_random_graph
 
     # Example from book.
