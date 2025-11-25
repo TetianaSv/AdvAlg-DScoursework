@@ -115,25 +115,25 @@ def reconstruct_path(predecessors, s, t):
         return []
     return path
 
-def load_underground_excel (path):
+def load_underground_excel (path):#load the spreadsheet and extract the data from it
     df = pd.read_excel(path)
 
     edges = []
     for _, row in df.iterrows():
-        u = str(row[1]).strip()
-        v = str(row[2]).strip()
-        w = (row[3])
-        if pd.isna(u) or pd.isna(v) or pd.isna(w):
+        u = str(row[1]).strip() #first station
+        v = str(row[2]).strip() #next station
+        w = (row[3]) #weight (minutes)
+        if pd.isna(u) or pd.isna(v) or pd.isna(w): #skips empty rows
             continue
-        edges.append((u, v, float(w)))
+        edges.append((u, v, float(w))) #store the edges
 
-    stations = sorted(set([u for u,_,_ in edges] + [v for _,v,_ in edges]))
-    id_by_name = {name.upper(): i for i, name in enumerate(stations)}
+    stations = sorted(set([u for u,_,_ in edges] + [v for _,v,_ in edges])) #get unqique station names
+    id_by_name = {name.upper(): i for i, name in enumerate(stations)} #add id to stations
     name_by_id = {i: name for i, name in enumerate(stations)}
 
-    G = AdjacencyListGraph(len(stations), directed=False, weighted=True)
+    G = AdjacencyListGraph(len(stations), directed=False, weighted=True) #build the graph object using the data from spreadsheet
 
-    for (u_name, v_name, w) in edges:
+    for (u_name, v_name, w) in edges: #add edges to the graph
         u = id_by_name[u_name.upper()]
         v = id_by_name [v_name.upper()]
 
