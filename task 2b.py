@@ -108,11 +108,11 @@ if __name__ == "__main__":
         seed=42
     )
 
-#Import the required algorithms from CLRS library
+#part 2b:London underground data import
 from adjacency_list_graph import AdjacencyListGraph
 from dijkstra import dijkstra
 
-#Load data from Excel file
+#required import library to open excel file
 from openpyxl import load_workbook
 
 def load_edges_from_excel(file_path):
@@ -129,7 +129,7 @@ def load_edges_from_excel(file_path):
         if first_row:
             first_row = False
             continue
-        # Expect columns: [?, from, to, minutes]
+
         if row is None or len(row) < 4:
             skipped += 1
             continue
@@ -146,9 +146,9 @@ def load_edges_from_excel(file_path):
         except ValueError:
             skipped += 1
             continue
-        edges.append((src, dst, w))
+        edges.append((src, dst, w)) #store the edges
 
-    # Build station dictionary and graph (same as before)
+    # build station dictionary and graph 
     stations = []
     seen = set()
     for u, v, _ in edges:
@@ -174,7 +174,7 @@ def load_edges_from_excel(file_path):
 
     return G, id_by_name, name_by_id, skipped, dupes
 
-#Rebuild path from Dijkstra’s output
+#rebuild path from Dijkstra’s output
 def reconstruct_path(pi, s, t):
     path = []
     cur = t
@@ -185,10 +185,10 @@ def reconstruct_path(pi, s, t):
         cur = pi[cur]
     return path
 
-# Path to Excel file in the same folder
+# locate the excel file:
 file_path = 'London Underground data.xlsx'
 
-#Main interactive part
+#main function
 def main():
 
     print("Loading:", file_path)
