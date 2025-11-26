@@ -3,7 +3,6 @@ from mst import kruskal, get_total_weight
 
 #Returns a list of edges that form the MST.
 #The element of each edge in g is assumed to be its weight
-
 def original_graph():
     g = AdjacencyListGraph(7, False, True)
 
